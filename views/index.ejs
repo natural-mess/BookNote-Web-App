@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Notes</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome to my Book Notes</h1>
+        <a id="newNote" href="/new">New Note</a>
+        <ul id="booksList">
+            <% books.forEach(book=> { %>
+                <li>
+                    <h2>
+                        <%=book.name%>
+                    </h2>
+                    <small>
+                        <%=book.date %>
+                    </small>
+                    <small>
+                        <%=book.rating %>
+                    </small>
+                    <p>
+                        <%=book.note%>
+                    </p>
+                    <small>By: <%=book.author%> </small>
+                    <a class="edit" href="/edit<%= book.id %>">Edit</a>
+                    <a class="delete" href="/delete<%= book.id %>">Delete</a>
+                </li>
+            <% }); %>
+        </ul>
+    </div>
+
+</body>
+
+</html>
