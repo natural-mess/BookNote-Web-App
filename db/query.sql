@@ -3,7 +3,8 @@ CREATE TABLE books (
     isbn VARCHAR(13) NOT NULL,
     name VARCHAR(100) NOT NULL,
     author VARCHAR(50) NOT NULL,
-    date DATE,
-    rating TINYINT,
-    note TEXT
+    date TIMESTAMP DEFAULT NOW(),
+    rating smallint NOT NULL check (rating between 1 and 5),
+    note TEXT NOT NULL,
+    updated_at TIMESTAMP DEFAULT NOW()
 );

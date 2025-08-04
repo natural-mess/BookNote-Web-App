@@ -12,24 +12,31 @@
     <div class="container">
         <h1>Welcome to my Book Notes</h1>
         <a id="newNote" href="/new">New Note</a>
+        <br>
+        <form id="sorting" method="post" action="/">
+            <a id="sortTitle" name="sort" value="1" href="/">Sort by Title</a>
+            <a id="sortRecency" name="sort" value="2" href="/">Sort by Recency</a>
+            <a id="sortRating" name="sort" value="3" href="/">Sort by Best Rating</a>
+        </form>
         <ul id="booksList">
             <% books.forEach(book=> { %>
                 <li>
                     <h2>
-                        <%=book.name%>
+                        <a class="view" href="/view/<%= book.id %>"><%=book.name%></a>
                     </h2>
                     <small>
-                        <%=book.date %>
+                        Date: <%=book.date %>
                     </small>
+                    <br>
                     <small>
-                        <%=book.rating %>
+                        Rating: <%=book.rating %>/5
                     </small>
                     <p>
-                        <%=book.note%>
+                        <%=book.note.substring(0,100)+"..."%>
                     </p>
-                    <small>By: <%=book.author%> </small>
-                    <a class="edit" href="/edit<%= book.id %>">Edit</a>
-                    <a class="delete" href="/delete<%= book.id %>">Delete</a>
+                    <small>By: <%=book.author%> </small><br>
+                    <a class="edit" href="/edit/<%= book.id %>">Edit</a>
+                    <a class="delete" href="/delete/<%= book.id %>">Delete</a>
                 </li>
             <% }); %>
         </ul>

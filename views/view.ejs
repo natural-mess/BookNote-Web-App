@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Note</title>
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>
+            <%=book.name%>
+        </h2>
+        <small>
+            Date: <%=book.date %>
+        </small>
+        <br>
+        <small>
+            Rating: <%=book.rating %> / 5
+        </small>
+        <p>
+            <%=book.note %>
+        </p>
+        <small>By: <%=book.author%> </small><br>
+        <a class="edit" href="/edit/<%= book.id %>">Edit</a>
+        <a class="delete" href="/delete/<%= book.id %>">Delete</a>
+    </div>
+</body>
+
+</html>
