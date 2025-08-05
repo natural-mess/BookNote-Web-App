@@ -16,7 +16,7 @@ app.use(express.static("public"));
 // The URL pattern to access book covers is:
 // https://covers.openlibrary.org/b/$key/$value-$size.jpg
 // Source: https://openlibrary.org/dev/docs/api/covers
-const API_URL = "https://covers.openlibrary.org/b/isbn/";
+const API_URL = "https://covers.openlibrary.org/b/isbn";
 
 // database information
 const db = new pg.Client({
@@ -60,6 +60,9 @@ app.get("/", async (req, res) => {
         result = await db.query("SELECT * FROM books ORDER BY id ASC"); // default order
     }
     books = result.rows;
+    // const api_cover = await axios.get(`${API_URL}/0385472579-M.jpg?default=false`);
+    // console.log(api_cover.url);
+    // console.log(api_cover.status);
     res.render("index.ejs", {
       books,
     });

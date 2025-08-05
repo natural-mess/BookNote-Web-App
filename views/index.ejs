@@ -11,28 +11,30 @@
 <body>
     <div class="container">
         <h1>Welcome to my Book Notes</h1>
-        <a id="newNote" href="/new">New Note</a>
-        <br>
-        <a id="sortTitle" href="/?sort=title">Sort by Title</a>
-        <a id="sortRecency" href="/?sort=recency">Sort by Recency</a>
-        <a id="sortRating" href="/?sort=rating">Sort by Best Rating</a>
+        <a id="newPostBtn" href="/new">New Note</a>
+        <div class="sort">
+            <small>
+                <a class="sortBtn" href="/?sort=title">Sort by Title</a>
+                <a class="sortBtn" href="/?sort=recency">Sort by Recency</a>
+                <a class="sortBtn" href="/?sort=rating">Sort by Best Rating</a>
+        </small>
+        </div>
         <ul id="booksList">
             <% books.forEach(book=> { %>
                 <li>
                     <h2>
                         <a class="view" href="/view/<%= book.id %>"><%=book.name%></a>
                     </h2>
+                    <small>Author: <%=book.author%> </small>
                     <small>
-                        Date: <%=book.date %>
+                        Date read: <%=book.date %>
                     </small>
-                    <br>
                     <small>
                         Rating: <%=book.rating %>/5
                     </small>
                     <p>
-                        <%=book.note.substring(0,100)+"..."%>
+                        <%=book.note.substring(0,200)+"..."%>
                     </p>
-                    <small>By: <%=book.author%> </small><br>
                     <a class="edit" href="/edit/<%= book.id %>">Edit</a>
                     <a class="delete" href="/delete/<%= book.id %>">Delete</a>
                 </li>

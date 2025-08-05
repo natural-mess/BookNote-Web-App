@@ -13,17 +13,16 @@
         <h2>
             <%=book.name%>
         </h2>
+        <small>Author: <%=book.author%> </small>
         <small>
-            Date: <%=book.date %>
+            Date read: <%=book.date %>
         </small>
-        <br>
         <small>
             Rating: <%=book.rating %> / 5
         </small>
         <p>
             <%=book.note %>
         </p>
-        <small>By: <%=book.author%> </small><br>
         <a class="edit" href="/edit/<%= book.id %>">Edit</a>
         <a class="delete" href="/delete/<%= book.id %>">Delete</a>
     </div>

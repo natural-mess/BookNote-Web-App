@@ -23,8 +23,8 @@
                 <input type="text" name="isbn" placeholder="ISBN" value=<%=book.isbn %> required>
                 <input type="text" name="bookName" placeholder="Book name" value=<%=book.name %> required>
                 <input type="text" name="author" placeholder="Author" value=<%=book.author %> required>
-                <input type="number" name="rating" min="1" max="5" value=<%=book.rating %> required>
-                <textarea name="note" placeholder="note" required rows="50"><%=book.note %></textarea>
+                <input type="number" name="rating" placeholder="Rating (1 to 5)" min="1" max="5" value=<%=book.rating %> required>
+                <textarea name="note" placeholder="Note" required rows="20"><%=book.note %></textarea>
                 <button class="full-width" type="submit">
                     <%= submit %>
                 </button>
@@ -35,7 +35,7 @@
                 <input type="text" name="bookName" placeholder="Book name" required>
                 <input type="text" name="author" placeholder="Author" required>
                 <input type="number" name="rating" min="1" max="5" required>
-                <textarea name="note" placeholder="note" required rows="50"></textarea>
+                <textarea name="note" placeholder="Note" required rows="20"></textarea>
                 <button class="full-width" type="submit">
                     <%= submit %>
                 </button>
