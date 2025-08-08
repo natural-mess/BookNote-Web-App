@@ -36,7 +36,8 @@ var books = [];
 // 1 : sort by title
 // 2 : sort by recency
 // 3 : sort by best rating
-var sortType = 1;
+var error="";
+var temp_book = {};
 
 // Get data from db
 app.get("/", async (req, res) => {
@@ -56,13 +57,14 @@ app.get("/", async (req, res) => {
         result = await db.query("SELECT * FROM books ORDER BY name ASC");
         break;
 
+      case "lastUpdate":
+        result = await db.query("SELECT * FROM books ORDER BY updated_at DESC");
+        break;
+
       default:
         result = await db.query("SELECT * FROM books ORDER BY id ASC"); // default order
     }
     books = result.rows;
-    // const api_cover = await axios.get(`${API_URL}/0385472579-M.jpg?default=false`);
-    // console.log(api_cover.url);
-    // console.log(api_cover.status);
     res.render("index.ejs", {
       books,
     });
@@ -77,11 +79,23 @@ app.get("/book", async (req, res) => {
 });
 
 // Create new book note
+// If ISBN is invalid, website will ask user to correct ISBN
 app.get("/new", (req, res) => {
-  res.render("new.ejs", {
-    heading: "New Note",
-    submit: "Create Note",
-  });
+  if (error.length > 0) {
+    res.render("new.ejs", {
+      heading: "New Note",
+      submit: "Create Note",
+      error,
+      temp_book
+    });
+    error = "";
+    temp_book = "";
+  } else {
+    res.render("new.ejs", {
+      heading: "New Note",
+      submit: "Create Note",
+    });
+  }
 });
 
 // Add new book note to database when clicking submit
@@ -93,13 +107,23 @@ app.post("/new", async (req, res) => {
   var rating = req.body.rating;
   var note = req.body.note;
   try {
-    await db.query(
-      "INSERT INTO books (isbn, name, author, rating, note) VALUES ($1, $2, $3, $4, $5)",
-      [isbn, name, author, rating, note]
-    );
-    res.redirect("/");
-  } catch (err) {
-    console.log(err);
+    await axios.get(`${API_URL}/${isbn}-M.jpg?default=false`);
+    try {
+      await db.query(
+        "INSERT INTO books (isbn, name, author, rating, note) VALUES ($1, $2, $3, $4, $5)",
+        [isbn, name, author, rating, note]
+      );
+      res.redirect("/");
+    } catch (err) {
+      console.log(err);
+    }
+  } catch(err) {
+    // console.log(err);
+    // ISBN is invalid
+    error = "ISBN not found";
+    temp_book = {isbn, name, author, rating, note};
+    console.log(temp_book);
+    res.redirect("/new");
   }
 });
 

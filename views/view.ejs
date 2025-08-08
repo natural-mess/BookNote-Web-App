@@ -10,18 +10,23 @@
 
 <body>
     <div class="container">
-        <h2>
-            <%=book.name%>
-        </h2>
-        <small>Author: <%=book.author%> </small>
-        <small>
-            Date read: <%=book.date %>
-        </small>
-        <small>
-            Rating: <%=book.rating %> / 5
-        </small>
+        <ul id="booksList">
+            <li class="book-item">
+                <img src="https://covers.openlibrary.org/b/isbn/<%= book.isbn %>-M.jpg" alt="Cover of <%= book.name %>" class="cover">
+
+                <div class="info">
+                    <h1>
+                        <a class="view" href="/view/<%= book.id %>"><%= book.name %></a>
+                    </h1>
+                    <small>Author: <%= book.author %></small>
+                    <small>ISBN: <%= book.isbn %></small>
+                    <small>Date read: <%= book.date %></small>
+                    <small>Rating: <%= book.rating %> / 5</small>
+                </div>
+            </li>
+        </ul>
         <p>
-            <%=book.note %>
+            <%-book.note.replace(/\r\n|\n/g, "<br>" ) %>
         </p>
         <a class="edit" href="/edit/<%= book.id %>">Edit</a>
         <a class="delete" href="/delete/<%= book.id %>">Delete</a>

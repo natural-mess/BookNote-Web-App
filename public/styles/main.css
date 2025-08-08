@@ -1,3 +1,8 @@
+/* Apply to everything – easier than picking each element */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 /* Reset some default browser styles */
 body,
 h1,
@@ -66,7 +71,7 @@ textarea:focus {
   border-color: #007bff;
 }
 
-/* a,
+a,
 button {
   text-decoration: none;
   background-color: #007bff;
@@ -77,7 +82,7 @@ button {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
-} */
+}
 
 button.full-width {
   display: block;
@@ -85,10 +90,10 @@ button.full-width {
   width: 100%;
 }
 
-/* a,
+a,
 button:hover {
   background-color: #0056b3;
-} */
+}
 
 ul {
   list-style-type: none;
@@ -152,4 +157,26 @@ a.delete:hover {
 
 .sortBtn:hover {
   background-color: #ddd;
+}
+
+.book-item {
+  display: flex;                /* Align children side‑by‑side */
+  align-items: center;          /* Vertically center the image and text */
+  gap: 15px;                    /* Space between image & text */
+  padding: 20px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.book-item:last-child { border-bottom: none; }
+
+.cover {
+  width: auto;                  /* Fixed thumbnail size */
+  height: auto;                 /* Keep aspect ratio */
+  border-radius: 4px;           /* Rounded corners – optional */
+  object-fit: cover;            /* Crop if image is too tall/short */
+}
+
+/* Optional: keep the info text from getting too wide on big screens */
+.info {
+  flex: 1;                      /* Take up remaining space */
 }
